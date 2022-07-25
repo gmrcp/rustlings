@@ -1,11 +1,13 @@
 // variables2.rs
 // Execute `rustlings hint variables2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+
+
+use std::cmp::PartialEq;
 
 fn main() {
-    let x;
-    if x == 10 {
+    let x = "10";
+    if x.eq("10") {
         println!("x is ten!");
     } else {
         println!("x is not ten!");
