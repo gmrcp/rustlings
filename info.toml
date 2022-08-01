@@ -142,11 +142,11 @@ They are not the same. There are two solutions:
 1. Add a `return` ahead of `num * num;`
 2. remove `;`, make it to be `num * num`"""
 
-# IF
+# CONDITIONS
 
 [[exercises]]
 name = "if1"
-path = "exercises/if/if1.rs"
+path = "exercises/conditions/if1.rs"
 mode = "test"
 hint = """
 It's possible to do this in one line if you would like!
@@ -160,7 +160,7 @@ Remember in Rust that:
 
 [[exercises]]
 name = "if2"
-path = "exercises/if/if2.rs"
+path = "exercises/conditions/if2.rs"
 mode = "test"
 hint = """
 For that first compiler error, it's important in Rust that each conditional

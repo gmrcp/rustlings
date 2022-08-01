@@ -25,6 +25,14 @@ struct Team {
     goals_conceded: u8,
 }
 
+fn default_hashmap() -> Team {
+    Team {
+        name: String::from("default"),
+        goals_conceded: 0,
+        goals_scored: 0
+    }
+}
+
 fn build_scores_table(results: String) -> HashMap<String, Team> {
     // The name of the team is the key and its associated struct is the value.
     let mut scores: HashMap<String, Team> = HashMap::new();
@@ -40,6 +48,19 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+
+        let previous_value= scores.entry(team_1_name).or_insert(default_hashmap());
+        *previous_value = Team {
+            goals_scored: previous_value.goals_scored + team_1_score,
+            goals_conceded: previous_value.goals_conceded + team_2_score,
+            ..*previous_value
+        };
+        let previous_value = scores.entry(team_2_name).or_insert(default_hashmap());
+        *previous_value = Team {
+            goals_scored: previous_value.goals_scored + team_2_score,
+            goals_conceded: previous_value.goals_conceded + team_1_score,
+            ..*previous_value
+        };
     }
     scores
 }
