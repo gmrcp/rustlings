@@ -14,7 +14,6 @@
 
 // Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
 use std::collections::HashMap;
 
@@ -25,11 +24,20 @@ struct Team {
     goals_conceded: u8,
 }
 
-fn default_hashmap() -> Team {
+fn default_entry(name: &String) -> Team {
     Team {
-        name: String::from("default"),
+        name: name.to_string(),
         goals_conceded: 0,
         goals_scored: 0
+    }
+}
+
+fn update_hashmap(scores: &mut HashMap<String, Team>, name: &String, goals_scored: u8, goals_conceded: u8) {
+    let values = scores.entry(name.to_string()).or_insert(default_entry(name));
+    *values = Team {
+        goals_scored: values.goals_scored + goals_scored,
+        goals_conceded: values.goals_conceded + goals_conceded, 
+        name: name.to_string(),
     }
 }
 
@@ -49,18 +57,8 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
 
-        let previous_value= scores.entry(team_1_name).or_insert(default_hashmap());
-        *previous_value = Team {
-            goals_scored: previous_value.goals_scored + team_1_score,
-            goals_conceded: previous_value.goals_conceded + team_2_score,
-            ..*previous_value
-        };
-        let previous_value = scores.entry(team_2_name).or_insert(default_hashmap());
-        *previous_value = Team {
-            goals_scored: previous_value.goals_scored + team_2_score,
-            goals_conceded: previous_value.goals_conceded + team_1_score,
-            ..*previous_value
-        };
+        update_hashmap(&mut scores, &team_1_name, team_1_score, team_2_score);
+        update_hashmap(&mut scores, &team_2_name, team_2_score, team_1_score);
     }
     scores
 }

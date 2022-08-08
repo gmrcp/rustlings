@@ -11,3 +11,8 @@ mod enums;
 mod strings;
 mod modules;
 mod hashmaps;
+
+mod quiz2;
+
+mod options;
+mod error_handling;
