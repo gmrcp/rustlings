@@ -11,10 +11,23 @@
 // you can do this!
 // Execute `rustlings hint traits2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+
+// It's important to note here that mut self vs self is not the same as &self vs &mut self.
+// As with other parameters, the mut in mut self is just an annotation on the binding of self, not the type.
+//
+// The caller does not need to know about it:
+// you move the value one way or the other,
+// so it's up to the callee if it needs to mutate it or not
 
 trait AppendBar {
     fn append_bar(self) -> Self;
+}
+
+impl AppendBar for Vec<String> {
+    fn append_bar(mut self) -> Self {
+        self.push("Bar".into());
+        self
+    }
 }
 
 //TODO: Add your code here
