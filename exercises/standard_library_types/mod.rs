@@ -5,3 +5,5 @@ mod iterators2;
 mod iterators3;
 mod iterators4;
 mod iterators5;
+mod rc1;
+mod cow1;
